@@ -1,19 +1,19 @@
 package com.invillia.bank.domain.response;
 
-import com.invillia.bank.domain.Owner;
+import com.invillia.bank.domain.Account;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
-public class AccountReponse {
+public class OwnerResponse {
     private Long id;
-    private String accountNumber;
-    private Double balance;
-    private Owner owner;
+    private String cpf;
+    private String name;
+    private List<Account> accounts;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
-
 }
