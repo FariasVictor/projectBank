@@ -21,4 +21,11 @@ public class Account {
     @Column(nullable = false)
     @NotNull
     Double balance;
+    @CreationTimestamp
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
 }

@@ -13,6 +13,8 @@ public class AccountMapper {
     public AccountReponse accountToAccountReponse(final Account account){
         return AccountReponse.builder().id(account.getId())
                 .balance(account.getBalance())
+                .createdAt(account.getCreatedAt())
+                .updatedAt(account.getUpdatedAt())
                 .build();
     }
     public List<AccountReponse> accountToAccountResponse(final List<Account> accounts) {
