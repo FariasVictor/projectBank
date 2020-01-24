@@ -2,8 +2,10 @@ package com.invillia.bank.controller;
 
 import com.invillia.bank.domain.Account;
 import com.invillia.bank.domain.request.AccountRequest;
+import com.invillia.bank.domain.request.TransactionRequest;
 import com.invillia.bank.domain.response.AccountReponse;
 import com.invillia.bank.exception.NotFoundException;
+import com.invillia.bank.exception.TransactionException;
 import com.invillia.bank.service.impl.AccountServiceImpl;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +52,18 @@ public class AccountController {
     public HttpEntity<?> deleteAccountById(@PathVariable final Long id) throws NotFoundException {
         accountService.deleteAccountById(id);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping("/deposit/{id}")
+    public HttpEntity<?> deposit(@PathVariable final Long id, @RequestBody @Valid final TransactionRequest transaction)
+            throws NotFoundException, TransactionException{
+        accountService.deposit(id, transaction.getValue());
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/withdraw/{id}")
+    public HttpEntity<?> withdraw(@PathVariable final Long id, @RequestBody @Valid final TransactionRequest transaction)
+            throws NotFoundException, TransactionException{
+        accountService.withdraw(id, transaction.getValue());
+        return ResponseEntity.ok().build();
     }
 
 }

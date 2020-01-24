@@ -4,6 +4,7 @@ import com.invillia.bank.domain.Account;
 import com.invillia.bank.domain.request.AccountRequest;
 import com.invillia.bank.domain.response.AccountReponse;
 import com.invillia.bank.exception.NotFoundException;
+import com.invillia.bank.exception.TransactionException;
 import com.invillia.bank.mapper.AccountMapper;
 import com.invillia.bank.repository.AccountRepository;
 import com.invillia.bank.service.AccountService;
@@ -49,5 +50,31 @@ public class AccountServiceImpl implements AccountService {
                 .orElseThrow(()-> new NotFoundException("Não encontrado"));
         accountRepository.delete(account);
 
+    }
+
+    @Override
+    public void withdraw(Long id, Double value) throws NotFoundException, TransactionException {
+        Account account = accountRepository.findById(id).orElseThrow(()-> new NotFoundException("Account not found"));
+        if(value>0){
+            if(value<account.getBalance()){
+                account.setBalance(account.getBalance()-value);
+                accountRepository.save(account);
+            }else{
+                throw new TransactionException("Your account does not have enough balance");
+            }
+        }else{
+            throw new TransactionException("Invalid value");
+        }
+    }
+
+    @Override
+    public void deposit(Long id, Double value) throws NotFoundException, TransactionException {
+        Account account = accountRepository.findById(id).orElseThrow(()-> new NotFoundException("Account not found"));
+        if(value>0){
+            account.setBalance(account.getBalance()+value);
+            accountRepository.save(account);
+        }else{
+            throw new TransactionException("Invalid value");
+        }
     }
 }
