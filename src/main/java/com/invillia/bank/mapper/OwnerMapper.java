@@ -15,7 +15,7 @@ public class OwnerMapper {
                 .id(owner.getId())
                 .cpf(owner.getCpf())
                 .name(owner.getName())
-                .accounts(owner.getAccounts())
+                .account(owner.getAccount())
                 .createdAt(owner.getCreatedAt())
                 .updatedAt(owner.getUpdatedAt())
                 .build();

@@ -23,7 +23,7 @@ public class Account {
     @Column(nullable = false)
     @NotNull
     Double balance;
-    @ManyToOne
+    @OneToOne
     @JsonIgnore
     @JoinColumn(name = "id_owner")
     private Owner owner;

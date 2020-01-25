@@ -28,7 +28,7 @@ public class AccountMapper {
         Account account = new Account();
         return account.builder()
                 .accountNumber(accountRequest.getAccountNumber())
-                .balance(accountRequest.getBalance()).owner(account.getOwner())
+                .balance(accountRequest.getBalance()).owner(Owner.builder().id(accountRequest.getIdOwner()).build())
                 .build();
     }
 }

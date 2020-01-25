@@ -13,7 +13,7 @@ public class OwnerResponse {
     private Long id;
     private String cpf;
     private String name;
-    private List<Account> accounts;
+    private Account account;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 }

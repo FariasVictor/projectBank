@@ -17,5 +17,5 @@ public class AccountRequest {
     @NotNull
     private Double balance;
     @NotNull
-    private Owner idOwner;
+    private Long idOwner;
 }

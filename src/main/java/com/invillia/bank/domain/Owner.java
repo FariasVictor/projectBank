@@ -25,9 +25,8 @@ public class Owner {
     private String cpf;
     @Column
     private String name;
-    @JsonIgnore
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<Account> accounts;
+    @OneToOne(mappedBy = "owner", cascade = CascadeType.REMOVE)
+    private Account account;
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime createdAt;
