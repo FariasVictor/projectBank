@@ -14,7 +14,6 @@ public class AccountMapper {
     public AccountReponse accountToAccountReponse(final Account account){
         return AccountReponse.builder()
                 .id(account.getId())
-                .accountNumber(account.getAccountNumber())
                 .owner(account.getOwner())
                 .balance(account.getBalance())
                 .createdAt(account.getCreatedAt())
@@ -26,9 +25,7 @@ public class AccountMapper {
     }
     public Account accountRequestToAccount(final AccountRequest accountRequest) {
         Account account = new Account();
-        return account.builder()
-                .accountNumber(accountRequest.getAccountNumber())
-                .balance(accountRequest.getBalance()).owner(Owner.builder().id(accountRequest.getIdOwner()).build())
-                .build();
+        account.setBalance(accountRequest.getBalance());
+        return account;
     }
 }

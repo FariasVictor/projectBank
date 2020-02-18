@@ -1,11 +1,15 @@
 package com.invillia.bank.service.impl;
 
 
+import com.invillia.bank.domain.Account;
 import com.invillia.bank.domain.Owner;
+import com.invillia.bank.domain.request.AccountRequest;
 import com.invillia.bank.domain.request.OwnerRequest;
 import com.invillia.bank.domain.response.OwnerResponse;
 import com.invillia.bank.exception.NotFoundException;
+import com.invillia.bank.mapper.AccountMapper;
 import com.invillia.bank.mapper.OwnerMapper;
+import com.invillia.bank.repository.AccountRepository;
 import com.invillia.bank.repository.OwnerRepository;
 import com.invillia.bank.service.OwnerService;
 import org.springframework.stereotype.Service;
@@ -18,10 +22,14 @@ public class OwnerServiceImpl implements OwnerService {
 
     private OwnerMapper ownerMapper;
     private OwnerRepository ownerRepository;
+    private AccountRepository accountRepository;
+    private AccountMapper accountMapper;
 
-    public OwnerServiceImpl(OwnerMapper ownerMapper, OwnerRepository ownerRepository) {
+    public OwnerServiceImpl(OwnerMapper ownerMapper, OwnerRepository ownerRepository, AccountRepository accountRepository, AccountMapper accountMapper) {
         this.ownerMapper = ownerMapper;
         this.ownerRepository = ownerRepository;
+        this.accountRepository = accountRepository;
+        this.accountMapper = accountMapper;
     }
 
     @Override
@@ -38,7 +46,13 @@ public class OwnerServiceImpl implements OwnerService {
     @Override
     public Owner createOwner(OwnerRequest ownerRequest) throws NotFoundException {
         Owner owner = ownerMapper.ownerRequestToOwner(ownerRequest);
-        return ownerRepository.save(owner);
+        ownerRepository.save(owner);
+
+        Account account = accountMapper.accountRequestToAccount(new AccountRequest(0.0,owner.getId()));
+        account.setOwner(owner);
+        accountRepository.save(account);
+
+        return owner;
     }
 
     @Override

@@ -13,8 +13,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class AccountRequest {
     @NotNull
-    private String accountNumber;
-    @NotNull
     private Double balance;
     @NotNull
     private Long idOwner;

@@ -1,4 +1,5 @@
 package com.invillia.bank.domain;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +28,6 @@ public class Account {
     @JsonIgnore
     @JoinColumn(name = "id_owner")
     private Owner owner;
-    @Column(nullable = false)
-    private String accountNumber;
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime createdAt;
